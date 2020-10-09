@@ -106,11 +106,11 @@
             <div class="row">
               <div class="col form-group">
                   <label for="exampleInputEmail1">Dimensiones (m<sup>2</sup>)</label>
-                  <input type="number" class="form-control form-control-sm" min="0" max="9999" step="0.1" value="25" id="m2" onchange="calculoCADR()" />
+                  <input type="number" inputmode="numeric" pattern="[0-9]*" class="form-control form-control-sm" min="0" max="9999" step="0.1" value="25" id="m2" onchange="calculoCADR()" />
                 </div>
                 <div class="col form-group">
                   <label for="exampleInputEmail1">Altura (m)</label>
-                  <input type="number" class="form-control form-control-sm" min="1" max="99" step="0.1" value="2.5" id="altura" onchange="calculoCADR()" />
+                  <input type="number" inputmode="numeric" pattern="[0-9]*" class="form-control form-control-sm" min="1" max="99" step="0.1" value="2.5" id="altura" onchange="calculoCADR()" />
                 </div>
             </div>
             <!-- Ventilación & Normativa -->
@@ -139,10 +139,16 @@
             <div class="row">
                 <div class="col form-group">
                     <label for="exampleInputEmail1">CADR mín. necesaria m<sup>3</sup>/h</label>
-                    <span class="form-control" id="cadr" />
                   </div>
                   <div class="col form-group">
                     <label for="exampleInputEmail1">Cambio total <sup>aire</sup>/<sub>hora</sub></label>
+                  </div>
+              </div>
+            <div class="row">
+                <div class="col form-group">
+                    <span class="form-control" id="cadr" />
+                  </div>
+                  <div class="col form-group">
                     <span class="form-control" id="cambio-total" />
                   </div>
               </div>
@@ -151,10 +157,16 @@
             <div class="row">
                 <div class="col form-group">
                     <label for="exampleInputEmail1">Cambio ventilación aire fresco</label>
-                    <span class="form-control" id="aire-fresco" />
                   </div>
                   <div class="col form-group">
                     <label for="exampleInputEmail1">Cambio filtro HEPA portátil</label>
+                  </div>
+              </div>
+            <div class="row">
+                <div class="col form-group">
+                    <span class="form-control" id="aire-fresco" />
+                  </div>
+                  <div class="col form-group">
                     <span class="form-control" id="filtro-hepa" />
                   </div>
               </div>
