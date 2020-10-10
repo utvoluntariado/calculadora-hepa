@@ -1,498 +1,637 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Calculadora filtros HEPA</title>
-    <!-- CSS only -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-      crossorigin="anonymous">
-    <style>
-      body { background-color: #EFEFEF; margin: 0; font-size: 0.9rem; }
-      #contHEPA {
-        background-color: #FFF;
-        border: 1px solid #CCC;
-        border-radius: 5px;
-        box-shadow: 0px 3px 10px #CCC;
-        height: 100vh;
-        margin: 0px auto;
-        max-width: 425px;
-        padding: 0 16px;
-        position: relative;
-      }
-      #idioma{ position: absolute; top: 8px; right: 8px; font-size: .6rem; border-color: #CCC; width: 80px;}
-      h4.title {        
-        background: #7471fc;
-        margin: 0 -16px 16px;
-        color: white;
-        padding: 10px;
-        font-size: 18px;
-      }
-      div#tabHEPA { overflow-x: hidden; overflow-y: auto; height: calc(100% - 115px); margin-top: 10px; }
-      h6 { font-size: .9rem; }
-      .nav-link { padding: 3px 8px; }
-      #calculadora a {
-        text-decoration: none;
-        text-align: center;
-        display: block;
-        margin: 8px;
-        color: #666;
-      }
-      #calculadora a img {
-        border: 1px solid #CCC;
-        border-radius: 5px;
-      }
-      #aGoogle, #aAmazon { font-size: .8rem; }
-      #calculadora, #informacion { padding: 0; }
-      label { font-size: .75rem; }
-      input[type="number"] { text-align: right; padding-right: 8px; }
-      select.form-control { font-size: .8rem; }
-      #cadr, #cambio-total, #aire-fresco, #filtro-hepa { font-weight: bold; height: 32px; border: none; text-align: right; line-height: 20px; }
-      #cadr { background-color: #7471fc; color: #FFFFFF; font-size: 1.4rem; }
-      #cambio-total { background-color: mediumseagreen; color: #FFFFFF; font-size: 1.4rem; }
-      #aire-fresco, #filtro-hepa { background-color: cornsilk; font-size: 1.4rem; }
-      #informacion h6 { line-height: 22px; }
-      .form-group { margin-bottom: 0.5rem; }
 
-      .tg  {margin-top: 10px;border-collapse:collapse;border-spacing:0;}
-      .tg td{border-color:black;border-style:solid;border-width:1px;
-        overflow:hidden;padding:10px 5px;font-size: 11px;min-width: 55px;}
-      .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-        background-color: #7471fc;
-      }
-      .nav-link {
-        color: #7471fc;
-        display: table-caption;
-        text-align: center;
-      }
-      
-      .nav-link span{
-        display: block;
-      }
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora filtros HEPA</title>
+  <!-- CSS only -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <style>
+    body {
+      background-color: #EFEFEF;
+      margin: 0;
+      font-size: 0.9rem;
+    }
 
-      .nav-item{
-        width: 50%;
-        text-align: center;
-        display: grid;
-      }
+    #contHEPA {
+      background-color: #FFF;
+      border: 1px solid #CCC;
+      border-radius: 5px;
+      box-shadow: 0px 3px 10px #CCC;
+      height: 100vh;
+      margin: 0px auto;
+      max-width: 425px;
+      padding: 0 16px;
+      position: relative;
+    }
 
-      .nav-item:first-child{
-        border-right: 1px solid #ccc;
-      }
+    #idioma {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: .6rem;
+      border-color: #CCC;
+      width: 80px;
+    }
 
-      .nav-container{
-        position: fixed;
-        bottom: 4px;
-        left: 0;
-        width: 100%;
-        background: transparent;     
-      }
-      
-      .nav-container>.nav{
-        box-shadow: inset 0px 2px 4px -2px #ccc;
-        margin: 0 auto 1px;
-        max-width: 425px;
-        padding-top: 6px;
-      }
+    h4.title {
+      background: #7471fc;
+      margin: 0 -16px 16px;
+      color: white;
+      padding: 10px;
+      font-size: 18px;
+    }
 
-      #informacion img {
-          margin: 16px 0;
-      }
+    div#tabHEPA {
+      overflow-x: hidden;
+      overflow-y: auto;
+      height: calc(100% - 115px);
+      margin-top: 10px;
+    }
 
-      .nav-pills .nav-link.active{   
-        background-color: transparent;           
-        color:#7471fc;      
-      }
+    h6 {
+      font-size: .9rem;
+    }
 
-      .nav-pills .nav-link{          
-        color:#ccc;      
-      }
+    .nav-link {
+      padding: 3px 8px;
+    }
 
-      .row, .tab-pane img{
-        margin-bottom: 3px;
-      }
+    #calculadora a {
+      text-decoration: none;
+      text-align: center;
+      display: block;
+      margin: 8px;
+      color: #666;
+    }
 
-      /* width */
-      ::-webkit-scrollbar {
-        width: 5px;
-        border-radius: 2px;
-      }
+    #calculadora a img {
+      border: 1px solid #CCC;
+      border-radius: 5px;
+    }
 
-      /* Track */
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
+    #aGoogle,
+    #aAmazon {
+      font-size: .8rem;
+    }
 
-      /* Handle */
-      ::-webkit-scrollbar-thumb {
-        background: #888;
-      }
+    #calculadora,
+    #informacion {
+      padding: 0;
+    }
 
-      /* Handle on hover */
-      ::-webkit-scrollbar-thumb:hover {
-        background: #ccc;       
-      }
-      
-    </style>
-    <!-- JS, Popper.js, and jQuery -->
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-      crossorigin="anonymous"></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"></script>
-  </head>
-  <body>
-    <div class="container" id="contHEPA">
-      <select class="form-control form-control-sm" id="idioma">
-        <option value="es">Español</option>
-      </select>
-      <h4 class="title">Calculadora filtros HEPA</h4>
-      <div class="nav-container">
-        <ul class="nav nav-pills justify-content-center" role="tablist">
-          <li class="nav-item" role="presentation">
-            <a class="nav-link active" id="calculadora-tab" data-toggle="tab" href="#calculadora" role="tab" aria-controls="calculadora" aria-selected="true">
-              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calculator" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M12 1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
-                <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-2zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-4z"/>
-              </svg>
-              <span>Calculadora</span>
-            </a>
-          </li>
-          <li class="nav-item" role="presentation">
-            <a class="nav-link" id="informacion-tab" data-toggle="tab" href="#informacion" role="tab" aria-controls="informacion" aria-selected="false">
-              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-square-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.93 4.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-              </svg>
-              <span>Información</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-      
-      <div class="tab-content" id="tabHEPA">
-        <!-- Ventana calculadora -->
-        <div class="tab-pane fade show active" id="calculadora" role="tabpanel" aria-labelledby="calculadora-tab">
-          <form>
-            <!-- Dimensión & Altura -->
-            <h6>
-              Introduzca las dimensiones del habitáculo en m<sup>2</sup> y la altura en metros desde el suelo al techo. 
-            </h6>
+    label {
+      font-size: .75rem;
+      margin-bottom: 0;
+    }
+
+    input[type="number"] {
+      text-align: right;
+      padding-right: 8px;
+    }
+
+    select.form-control {
+      font-size: .8rem;
+    }
+
+    #cadr,
+    #cambio-total,
+    #aire-fresco,
+    #filtro-hepa,
+    #maxCO2,
+    #maxCO2SinFiltro,
+    #cfm {
+      font-weight: bold;
+      height: 32px;
+      border: none;
+      text-align: right;
+      line-height: 20px;
+    }
+
+    #cfm {
+      border: 1px solid #ccc;
+      font-weight: 100;
+    }
+
+    #cadr,
+    #maxCO2,
+    #maxCO2SinFiltro {
+      background-color: #7471fc;
+      color: #FFFFFF;
+      font-size: 1.4rem;
+    }
+
+    #cambio-total {
+      background-color: mediumseagreen;
+      color: #FFFFFF;
+      font-size: 1.4rem;
+    }
+
+    #aire-fresco,
+    #filtro-hepa {
+      background-color: cornsilk;
+      font-size: 1.4rem;
+    }
+
+    #informacion h6 {
+      line-height: 22px;
+    }
+
+    .form-group {
+      margin-bottom: 0.5rem;
+    }
+
+    .tg {
+      margin-top: 10px;
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    .tg td {
+      border-color: #ccc;
+      border-style: solid;
+      border-width: 1px;
+      overflow: hidden;
+      padding: 10px 5px;
+      font-size: 11px;
+      min-width: 55px;
+      text-align: center;
+    }
+
+    .nav-pills .nav-link.active,
+    .nav-pills .show>.nav-link {
+      background-color: #7471fc;
+    }
+
+    .nav-link {
+      color: #7471fc;
+      display: table-caption;
+      text-align: center;
+    }
+
+    .nav-link span {
+      display: block;
+    }
+
+    .nav-item {
+      width: 50%;
+      text-align: center;
+      display: grid;
+    }
+
+    .nav-item:first-child {
+      border-right: 1px solid #ccc;
+    }
+
+    .nav-container {
+      position: fixed;
+      bottom: 4px;
+      left: 0;
+      width: 100%;
+      background: transparent;
+    }
+
+    .nav-container>.nav {
+      box-shadow: inset 0px 2px 4px -2px #ccc;
+      margin: 0 auto 1px;
+      max-width: 425px;
+      padding-top: 6px;
+    }
+
+    #informacion img {
+      margin: 16px 0;
+    }
+
+    .nav-pills .nav-link.active {
+      background-color: transparent;
+      color: #7471fc;
+    }
+
+    .nav-pills .nav-link {
+      color: #ccc;
+    }
+
+    .row,
+    .tab-pane img {
+      margin-bottom: 3px;
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+      width: 5px;
+      border-radius: 2px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ccc;
+    }
+
+    .resultado {
+      padding: 10px;
+      background: rgb(116 113 252 / 0.1);
+      border-radius: 5px;
+    }
+
+    .subtitle {
+      background: rgb(116 113 252 / 0.75);
+      color: white;
+      padding: 5px 0;
+      font-weight: 500;
+      margin: 30px 0 10px;
+      text-align: center;
+    }
+  </style>
+  <!-- JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="container" id="contHEPA">
+    <select class="form-control form-control-sm" id="idioma">
+      <option value="es">Español</option>
+    </select>
+    <h4 class="title">Calculadora filtros HEPA</h4>
+    <div class="nav-container">
+      <ul class="nav nav-pills justify-content-center" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="calculadora-tab" data-toggle="tab" href="#calculadora" role="tab"
+            aria-controls="calculadora" aria-selected="true">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calculator" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M12 1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z" />
+              <path
+                d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-2zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-4z" />
+            </svg>
+            <span>Calculadora</span>
+          </a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="informacion-tab" data-toggle="tab" href="#informacion" role="tab"
+            aria-controls="informacion" aria-selected="false">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-square-fill" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.93 4.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+            </svg>
+            <span>Información</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="tab-content" id="tabHEPA">
+      <!-- Ventana calculadora -->
+      <div class="tab-pane fade show active" id="calculadora" role="tabpanel" aria-labelledby="calculadora-tab">
+        <form>
+          <!-- Dimensión & Altura -->
+          <h6>
+            Introduzca las dimensiones del habitáculo en m<sup>2</sup> y la altura en metros desde el suelo al techo.
+          </h6>
+          <div class="row">
+            <div class="col form-group">
+              <label for="exampleInputEmail1">Largo (m)</label>
+              <input type="number" inputmode="numeric" pattern="[0-9]*" class="form-control form-control-sm" min="0"
+                max="9999" step="0.1" value="10" id="largo" onchange="calculoCADR()" />
+            </div>
+            <div class="col form-group">
+              <label for="exampleInputEmail1">Ancho (m)</label>
+              <input type="number" inputmode="numeric" pattern="[0-9]*" class="form-control form-control-sm" min="0"
+                max="9999" step="0.1" value="5" id="ancho" onchange="calculoCADR()" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
+              <label for="exampleInputEmail1">Altura (m)</label>
+              <input type="number" inputmode="numeric" pattern="[0-9]*" class="form-control form-control-sm" min="1"
+                max="99" step="0.1" value="2.8" id="altura" onchange="calculoCADR()" />
+            </div>
+            <div class="col form-group">
+              <label for="exampleInputEmail1">Cambios de aire que desea</label>
+              <input type="number" inputmode="numeric" pattern="[0-9]*" class="form-control form-control-sm" min="1"
+                max="99" step="0.1" value="2" id="cambios" onchange="calculoCADR()" />
+              <label for="exampleInputEmail1">* Recomendación Harvard es 5 (mejor dejarlo en 5)</label>
+            </div>
+          </div>
+
+          <!-- Ventilación & Normativa -->
+          <h6>
+            Seleccione el nivel de ventilación del habitáculo y la normativa vigente del país.
+          </h6>
+          <div class="row">
+            <div class="col form-group">
+              <label for="exampleInputEmail1">Ventilación</label>
+              <select class="form-control form-control-sm" id="ventilacion" onchange="calculoCADR()">
+                <option value="3">Buena ventilación (cumple con RITE)</option>
+                <option value="4">Ventilación mejorada con algún sistema</option>
+                <option value="1.5">Normal</option>
+                <option value="1">Ventilación baja</option>
+                <option value="0.5">Mala ventilación</option>
+              </select>
+            </div>
+            <div class="col form-group">
+              <label for="exampleInputEmail1">Normativa</label>
+              <select class="form-control form-control-sm" id="normativa" onchange="calculoCADR()">
+                <option value="1">Normativa americana</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="resultado">
             <div class="row">
               <div class="col form-group">
-                  <label for="exampleInputEmail1">Dimensiones (m<sup>2</sup>)</label>
-                  <input type="number" inputmode="numeric" pattern="[0-9]*" class="form-control form-control-sm" min="0" max="9999" step="0.1" value="25" id="m2" onchange="calculoCADR()" />
-                </div>
-                <div class="col form-group">
-                  <label for="exampleInputEmail1">Altura (m)</label>
-                  <input type="number" inputmode="numeric" pattern="[0-9]*" class="form-control form-control-sm" min="1" max="99" step="0.1" value="2.5" id="altura" onchange="calculoCADR()" />
-                </div>
+                <label for="exampleInputEmail1">CADR m<sup>3</sup>/h</label>
+              </div>
+              <!--<div class="col form-group">
+              <label for="exampleInputEmail1">Cambio total <sup>aire</sup>/<sub>hora</sub></label>
+            </div>-->
+              <div class="col form-group">
+                <label for="exampleInputEmail1">CADR cfm</label>
+              </div>
             </div>
-            <!-- Ventilación & Normativa -->
-            <h6>
-              Seleccione el nivel de ventilación del habitáculo y la normativa vigente del país.
-            </h6>
             <div class="row">
-                <div class="col form-group">
-                    <label for="exampleInputEmail1">Ventilación</label>
-                    <select class="form-control form-control-sm" id="ventilacion" onchange="calculoCADR()">
-                      <option value="3">Buena ventilación (cumple con RITE)</option>
-                      <option value="4">Ventilación mejorada con algún sistema</option>
-                      <option value="1.5">Normal</option>
-                      <option value="1">Ventilación baja</option>
-                      <option value="0.5">Mala ventilación</option>
-                    </select>
-                  </div>
-                  <div class="col form-group">
-                    <label for="exampleInputEmail1">Normativa</label>
-                    <select class="form-control form-control-sm" id="normativa" onchange="calculoCADR()">
-                      <option value="1">Normativa americana</option>
-                    </select>
-                  </div>
+              <div class="col form-group">
+                <span class="form-control" id="cadr" />
               </div>
-            <!-- CADR & Cambio Total -->
-            <div class="row">
-                <div class="col form-group">
-                    <label for="exampleInputEmail1">CADR mín. necesaria m<sup>3</sup>/h</label>
-                  </div>
-                  <div class="col form-group">
-                    <label for="exampleInputEmail1">Cambio total <sup>aire</sup>/<sub>hora</sub></label>
-                  </div>
+              <!--<div class="col form-group">
+              <span class="form-control" id="cambio-total" />
+            </div>-->
+              <div class="col form-group">
+                <span class="form-control" id="cfm" />
               </div>
-            <div class="row">
-                <div class="col form-group">
-                    <span class="form-control" id="cadr" />
-                  </div>
-                  <div class="col form-group">
-                    <span class="form-control" id="cambio-total" />
-                  </div>
-              </div>
+            </div>
             <!-- Aire fresco & Aire filtro HEPA -->
             <!-- h6>Cambio de aire</h6 -->
-            <div class="row">
-                <div class="col form-group">
-                    <label for="exampleInputEmail1">Cambio ventilación aire fresco</label>
-                  </div>
-                  <div class="col form-group">
-                    <label for="exampleInputEmail1">Cambio filtro HEPA portátil</label>
-                  </div>
+            <!--<div class="row">
+              <div class="col form-group">
+                <label for="exampleInputEmail1">Cambio ventilación aire fresco</label>
               </div>
-            <div class="row">
-                <div class="col form-group">
-                    <span class="form-control" id="aire-fresco" />
-                  </div>
-                  <div class="col form-group">
-                    <span class="form-control" id="filtro-hepa" />
-                  </div>
+              <div class="col form-group">
+                <label for="exampleInputEmail1">Cambio filtro HEPA portátil</label>
               </div>
-          </form>
-          <div class="row">
-            <div class="col">
-              <a href="https://www.google.com/search?tbm=shop&q=filtros+hepa" target="_blank">
-                <img alt="" class="BcUvif" width="50" height="50" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAA2FBMVEX///8rqU5Nsmb/ugA7g/f7/P80gPf/uAD8//8AnzP///3/vABGiPdAhfe6z/wvfvfv9+/t8v/vOijvPjBvnvkbpUWGrPkoe/f//PfuNSLa5P5sm/nvKxXy9f7d5/33pJ//0HasxPvyTkD/viFflfj0hH1UjvifvPp6pfq3277G4soAnCmXtvvP3P7j5/gAcPb92Nb4s6//9N7/3qD/7tH94+Pzd2/yZlv8xsL/y13/yVD/68X+7+7uIwDxbmfyVkr/2I72lpX/6bj1jYn/vzb3urxouX13vocOkK5fAAADuUlEQVRoge2W73uiOBDHc0cInIJZEg8EUfyBwN6pVRS1Ltbutt7+///RTQTbbss+avf64p4nnxfqhEy+mcxMECGJRCKRSCQSiUQikUguRQU+VqEbh9ihUdLoXO+rf/781wXTrAQTLCDU6F8t8unvP38/P8szqEmJEYYGwaYzvvbQPv3x23mRCYUI4imsrU6ajtO4UuMiEcvAtD0tjVrjHcd1gYhNcGRdvfJ1ItaN6Ux+ReMSkTGhSfWT2TyYz1onq5UuFovlk6l6/bhhIWtqPYtkwqFqJbWJSWWqZyvuui5fbwpzeTvUNEXZfilMr40pIVEjNBO1FMlHA+Gwyt6u1Qkx7pY/Gyc80PAZ3+128DEXz76AgAYo2kKYUJDYuXEwNXGzFMkHLvfBwR3kb0SsEJulSNch1KGEEidBmc/ZapPPRpz7B4RSra7cLlvLnlLXIJYuMWnT60yaxMTtUuSO8f0mz0acrasiMb0nEQIS1CQJGjG2QjrS9cDle4R6mtariTn3Wn3bQjal9rFlm+QUyYzxtTiobM93cML6z3LS6R8Zm8TOB3xQnu2au7N0qAyLlLe2Sn0JnYWLO66LT5F8Zf5GR7MHxt1d8DqS2piSU3Ud91prEBLPRCAFX5l7WJ4CEaFo3yAjzcJU26SMZOT62Xzvu/4+yHX0GugT6r0cgOt4AiKjcmrA2PwHEQVEiF2azZPIivGB64s86m81EEoIDl/ciZ6DiQ4id6UNmTwslfpt2SE9EOmCRyHSCUn7FAnn7GGGKiUgFIJp+HSvTIjp9FG+53xznJ5x7matR0VZHh+ndWWYqhEug4eDK0XmLr9rFR6VKrAuNmJLvBm7NobagrgCn/NjsUDeRwgttPqjUEm3itZDKHZwJOq+a5hmKSK2JTqqFrijt41y3A9s32gmNrSx6bRF4ah7xvlo/rBnTIhBUSn1+8X9EL5SOKWIYMOOxyZ+7pO5z91VENy5xxKuoJM40MIE3o6UjIuh/A6cXMb9opRbW005NvxjWuQCMgdNFRlCpHgzBj5j4OHyg44qE6N6dgjFb4Tjae00dFhDs6yDMvbWYjscDrcLyL+oErXfNkg0nkaiGf/5/h2G9NloMOD7h6w69cWi1nRqqbWXI3mWv6iWWpqmrec9wvwOmhrEfnbQ8yyrzMe7UCd20fETSuP/bNVXxI6TCBUrwjfe2dnvZGqaNOw3YuiX5kdpwLUAteU4UPi/9u/gDB07MogZxR/8x9byJt1O7fw8iUQikUgkEolEIpH87/gXuFVhpfM15iMAAAAASUVORK5CYII=" data-deferred="1" data-iml="1082.0700000040233" data-atf="true">
-                <div>Filtros HEPA</div>
-              </a>
             </div>
-            <div class="col">
-              <a href="https://www.amazon.es/s?k=filtros+hepa" target="_blank">
-                <img alt="" class="BcUvif" width="50" height="50" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAAk1BMVEX///8AAAD/mgD/nAD/nhP/mAC0tLT/lQD//vzr6+vh4eHExMSYmJi8vLzw8PD19fXY2NilpaXQ0NCsrKz/9er/1auKioosLCwnJycbGxufn59hYWH/+/b/7Nf/qz//797/0Z//tmL/sVdubm4PDw9UVFR/f39KSkpBQUE3Nzf/xYP/z5f/373/48f/pSz/vnT/qEfVbPXOAAACbElEQVRoge2X2ZaiMBBAQyCGRdwAu1EhgordEYX//7qJGALD2Kc7TpiXyX3wyGJdK1UpEQCNRqPRaDQajUbzP7GaHt4MxvG09uejGGabd6NPMVPvCN6MAe+easd6qLij2DJ95jBiR6Vj1V+lfl1USk5t1K3nzJ2JKE+s0LE48qDTx7ErUnHVSZY85Lk9IdpAYel9XoeJONFKfHUSAObOYuUHnXUUyQCvlUy+v/cVZq4XbLbjSdygOLd9No5kOB/HkHjPFIolm17g4zGOx5AsO0Xhu84o3dXNRz5XxpCI+dhuR1+9RMxDMbsC9ZLJYLF6faBOImauGF5ixy+VSYphJgvRCFtlEpHJ6XE8F42g8FdLlJmvV9E5Wu/f062OcZj4m0+jz1qV5cP4mqOqxyLvj9DrM38Tq/uVHz7bBWDxmJGfPA+b7Cmll3InEZRcByf6U9j4WAA+z3gH2/sbxoiBcxkJypPfz7gFH+/xgT88sGGz4RerNKsorVJo1raEJaxRNtDMHc/3V073v2QmSr6zm9h2CmUyYZ+rsFldJb4XIQDUqJKSABBhhOv9DytZZji1gYVLSQkIc2SyUkbkm/t2ZYUwTglIsBXKSoAdWcgyIUzplXyxcGESZRZkXNgNF0ylHfcY1IKWZSJ4q6t9ScKQlZhFYy+7kMWnecquMUnTJHaN5BNpIJRlwzAh2wXwludZQ55aiO0Mk12BKHvsqgRHrznu2bCdBu/RGpfgcQixRduaVS8tliChOcSoFbU6lkpa9UaDzD58yi4sWQGaRbvDMktzGhGZUfVDQpKUUUOZjBFfo9FoNBqNRqP5h/wCMQwl0aXF8ykAAAAASUVORK5CYII=" data-deferred="1" data-iml="1269.8649999802" data-atf="true">
-                <div>Filtros HEPA</div>
-              </a>
+            <div class="row">
+              <div class="col form-group">
+                <span class="form-control" id="aire-fresco" />
+              </div>
+              <div class="col form-group">
+                <span class="form-control" id="filtro-hepa" />
+              </div>
+            </div>-->
+          </div>
+
+          <div class="subtitle">Límite CO2 que no puede superar el medidor</div>
+
+
+          <h6>
+            Tasa de Generación de CO2
+          </h6>
+          <div class="row">
+            <div class="col form-group">
+              <label for="exampleInputEmail1">Número de estudiantes</label>
+              <input type="number" inputmode="numeric" pattern="[0-9]*" class="form-control form-control-sm" min="0"
+                max="9999" step="0.1" value="25" id="estudiantes" onchange="calculoCADR()" />
+            </div>
+            <div class="col form-group">
+              <label for="exampleInputEmail1">Númnero de profesores</label>
+              <input type="number" inputmode="numeric" pattern="[0-9]*" class="form-control form-control-sm" min="0"
+                max="9999" step="0.1" value="1" id="profesores" onchange="calculoCADR()" />
+            </div>
+            <div class="col form-group">
+              <label for="exampleInputEmail1">Calibración CO2 exterior</label>
+              <input type="number" inputmode="numeric" pattern="[0-9]*" placeholder="(ppp)"
+                class="form-control form-control-sm" min="0" max="9999" step="0.1" value="400" id="calibracionCO2"
+                onchange="calculoCADR()" />
             </div>
           </div>
-          <!-- Búsquedas dinámicas -->
-          <div class="row">
-            <div class="col">
-              <a id="aGoogle" href="#" target="_blank">
-                <img alt="" class="BcUvif" width="50" height="50" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAA2FBMVEX///8rqU5Nsmb/ugA7g/f7/P80gPf/uAD8//8AnzP///3/vABGiPdAhfe6z/wvfvfv9+/t8v/vOijvPjBvnvkbpUWGrPkoe/f//PfuNSLa5P5sm/nvKxXy9f7d5/33pJ//0HasxPvyTkD/viFflfj0hH1UjvifvPp6pfq3277G4soAnCmXtvvP3P7j5/gAcPb92Nb4s6//9N7/3qD/7tH94+Pzd2/yZlv8xsL/y13/yVD/68X+7+7uIwDxbmfyVkr/2I72lpX/6bj1jYn/vzb3urxouX13vocOkK5fAAADuUlEQVRoge2W73uiOBDHc0cInIJZEg8EUfyBwN6pVRS1Ltbutt7+///RTQTbbss+avf64p4nnxfqhEy+mcxMECGJRCKRSCQSiUQikUguRQU+VqEbh9ihUdLoXO+rf/781wXTrAQTLCDU6F8t8unvP38/P8szqEmJEYYGwaYzvvbQPv3x23mRCYUI4imsrU6ajtO4UuMiEcvAtD0tjVrjHcd1gYhNcGRdvfJ1ItaN6Ux+ReMSkTGhSfWT2TyYz1onq5UuFovlk6l6/bhhIWtqPYtkwqFqJbWJSWWqZyvuui5fbwpzeTvUNEXZfilMr40pIVEjNBO1FMlHA+Gwyt6u1Qkx7pY/Gyc80PAZ3+128DEXz76AgAYo2kKYUJDYuXEwNXGzFMkHLvfBwR3kb0SsEJulSNch1KGEEidBmc/ZapPPRpz7B4RSra7cLlvLnlLXIJYuMWnT60yaxMTtUuSO8f0mz0acrasiMb0nEQIS1CQJGjG2QjrS9cDle4R6mtariTn3Wn3bQjal9rFlm+QUyYzxtTiobM93cML6z3LS6R8Zm8TOB3xQnu2au7N0qAyLlLe2Sn0JnYWLO66LT5F8Zf5GR7MHxt1d8DqS2piSU3Ud91prEBLPRCAFX5l7WJ4CEaFo3yAjzcJU26SMZOT62Xzvu/4+yHX0GugT6r0cgOt4AiKjcmrA2PwHEQVEiF2azZPIivGB64s86m81EEoIDl/ciZ6DiQ4id6UNmTwslfpt2SE9EOmCRyHSCUn7FAnn7GGGKiUgFIJp+HSvTIjp9FG+53xznJ5x7matR0VZHh+ndWWYqhEug4eDK0XmLr9rFR6VKrAuNmJLvBm7NobagrgCn/NjsUDeRwgttPqjUEm3itZDKHZwJOq+a5hmKSK2JTqqFrijt41y3A9s32gmNrSx6bRF4ah7xvlo/rBnTIhBUSn1+8X9EL5SOKWIYMOOxyZ+7pO5z91VENy5xxKuoJM40MIE3o6UjIuh/A6cXMb9opRbW005NvxjWuQCMgdNFRlCpHgzBj5j4OHyg44qE6N6dgjFb4Tjae00dFhDs6yDMvbWYjscDrcLyL+oErXfNkg0nkaiGf/5/h2G9NloMOD7h6w69cWi1nRqqbWXI3mWv6iWWpqmrec9wvwOmhrEfnbQ8yyrzMe7UCd20fETSuP/bNVXxI6TCBUrwjfe2dnvZGqaNOw3YuiX5kdpwLUAteU4UPi/9u/gDB07MogZxR/8x9byJt1O7fw8iUQikUgkEolEIpH87/gXuFVhpfM15iMAAAAASUVORK5CYII=" data-deferred="1" data-iml="1082.0700000040233" data-atf="true">
-                <div></div>
-              </a>
+
+
+          <div class="resultado">
+            <div class="row">
+              <div class="col form-group">
+                <label for="exampleInputEmail1">Límite CO2 que no puede superar el medidor si NO usa filtro HEPA</label>
+              </div>
+              <!--<div class="col form-group">
+            <label for="exampleInputEmail1">Cambio total <sup>aire</sup>/<sub>hora</sub></label>
+          </div>-->
+              <div class="col form-group">
+                <label for="exampleInputEmail1">Límite CO2 que no puede superar el medidor si usa filtro HEPA*</label>
+              </div>
             </div>
-            <div class="col">
-              <a id="aAmazon" href="#" target="_blank">
-                <img alt="" class="BcUvif" width="50" height="50" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAAk1BMVEX///8AAAD/mgD/nAD/nhP/mAC0tLT/lQD//vzr6+vh4eHExMSYmJi8vLzw8PD19fXY2NilpaXQ0NCsrKz/9er/1auKioosLCwnJycbGxufn59hYWH/+/b/7Nf/qz//797/0Z//tmL/sVdubm4PDw9UVFR/f39KSkpBQUE3Nzf/xYP/z5f/373/48f/pSz/vnT/qEfVbPXOAAACbElEQVRoge2X2ZaiMBBAQyCGRdwAu1EhgordEYX//7qJGALD2Kc7TpiXyX3wyGJdK1UpEQCNRqPRaDQajUbzP7GaHt4MxvG09uejGGabd6NPMVPvCN6MAe+easd6qLij2DJ95jBiR6Vj1V+lfl1USk5t1K3nzJ2JKE+s0LE48qDTx7ErUnHVSZY85Lk9IdpAYel9XoeJONFKfHUSAObOYuUHnXUUyQCvlUy+v/cVZq4XbLbjSdygOLd9No5kOB/HkHjPFIolm17g4zGOx5AsO0Xhu84o3dXNRz5XxpCI+dhuR1+9RMxDMbsC9ZLJYLF6faBOImauGF5ixy+VSYphJgvRCFtlEpHJ6XE8F42g8FdLlJmvV9E5Wu/f062OcZj4m0+jz1qV5cP4mqOqxyLvj9DrM38Tq/uVHz7bBWDxmJGfPA+b7Cmll3InEZRcByf6U9j4WAA+z3gH2/sbxoiBcxkJypPfz7gFH+/xgT88sGGz4RerNKsorVJo1raEJaxRNtDMHc/3V073v2QmSr6zm9h2CmUyYZ+rsFldJb4XIQDUqJKSABBhhOv9DytZZji1gYVLSQkIc2SyUkbkm/t2ZYUwTglIsBXKSoAdWcgyIUzplXyxcGESZRZkXNgNF0ylHfcY1IKWZSJ4q6t9ScKQlZhFYy+7kMWnecquMUnTJHaN5BNpIJRlwzAh2wXwludZQ55aiO0Mk12BKHvsqgRHrznu2bCdBu/RGpfgcQixRduaVS8tliChOcSoFbU6lkpa9UaDzD58yi4sWQGaRbvDMktzGhGZUfVDQpKUUUOZjBFfo9FoNBqNRqP5h/wCMQwl0aXF8ykAAAAASUVORK5CYII=" data-deferred="1" data-iml="1269.8649999802" data-atf="true">
-                <div></div>
-              </a>
+            <div class="row">
+              <div class="col form-group">
+                <span class="form-control" id="maxCO2SinFiltro" />
+              </div>
+              <div class="col form-group">
+                <span class="form-control" id="maxCO2" />
+              </div>
             </div>
+            <div class="row">                     
+              <div class="col form-group">
+                <label for="exampleInputEmail1">* No es deseable que los ppm superen la tasa de arriba en ningún caso, pero en caso extremo de frío se estarían eliminando el virus y los aerosoles y se podría llegar a esos ppm</label>
+              </div>
+            </div>
+
           </div>
-          
-        </div>
-        <!-- Ventana información -->
-        <div class="tab-pane fade" id="informacion" role="tabpanel" aria-labelledby="informacion-tab">
-          <h6>Enlaces de interés:</h6>
-          <ul>
-            <li>
-              <a href="https://twitter.com/i/events/1292144158124249088?s=20" target="_blanck">
-                [Hilo Twitter Pablo Fuentes] Purificadores de Aire para eliminar el SARS-COV-2
-              </a>
-            </li>
-            <li>
-              <a href="https://www.xatakahome.com/electrodomesticos-innovadores/esto-que-tienes-que-mirar-al-comprar-purificador-aire-para-hogar" target="_blanck">
-                [xatakahome] Electrodomésticos innovadores
-              </a>
-            </li>
-            <li>
-              <a href="https://www.xatakahome.com/seguridad-en-el-hogar/asi-puede-ayudar-a-protegerte-frente-al-coronavirus-filtro-tu-aire-acondicionado-purificador-ambiental" target="_blanck">
-                [xatakahome] Seguridad en el hogar
-              </a>
-            </li>
-            <li>
-              <a href="https://www.wired.com/story/could-a-janky-jury-rigged-air-purifier-help-fight-covid-19/" target="_blanck">
-                [wired] Could a janky jury rigged air purifier help fight covid 19
-              </a>
-            </li>
-          </ul>
-          <h6>Información de interés</h6>
-          <p>La efectividad o eficiencia de los filtros se mide de acuerdo con unos procedimientos de prueba, realizados según unas normas internacionales.</p>
-          <p>
-            Las más comunes son:
-            <ul>
-              <li>La Ashrae, americana</li>
-              <li>La Eurovent, europea</li>
-              <li>La British Estándar, inglesa</li>
-              <li>La Din, alemana</li>
-            </ul>
-          </p>
-          <p>
-            Para los filtros de baja eficiencia, prefiltros donde son retenidas partículas gruesas, se utilizan métodos de prueba que nos proporcionan la eficiencia gravimétrica, la cual está
-            basada en el porcentaje en peso de las partículas de polvo retenidas.              
-          </p>
-          <p>
-            Para filtros de media y alta eficiencia, utilizados en la retención de ligeras y pequeñas
-            partículas, la eficiencia del filtro es medida por el método de la mancha de polvo o
-            colorimétrico, donde se compara con un filtro limpio, la mancha de polvo atmosférico
-            retenido por otro filtro similar. La comparación de colores se hace mediante fotómetro.
-            Para filtros denominados como absolutos, se suelen utilizar los métodos de llama de
-            sodio o DOP.
-            <br />
-            Para los filtros de gases aun no se ha normalizado cual es el gas a tomar como
-            referencia en la determinación de su eficiencia, debido a la gran cantidad y tipos de gases
-            a filtrar.
-            <br />
-            Se suelen utilizar el ozono, que simula la estructura de los contaminantes del
-            exterior en áreas metropolitanas y el tolueno, que representa la habilidad de los filtros para
-            remover bioefluentes y VOC´s (compuestos orgánicos volátiles) como los formaldehídos,
-            plastificantes, etc.
-          </p>
-          <h6>
-              Normas CEN EN 1822 para filtros HEPA y ULPA <mark>(solo comprar H13-H14- U15-U16-U17)</mark>
-          </h6>
-          <p>
-            Para los filtros HEPA y ULPA, la clasificación se basaba en la norma Eurovent 4/4 que
-            definía cinco clases de filtros: EU-10, EU-11, EU-12, EU-13, EU-14. Con el objeto de hacer
-            frente a las exigencias de la alta tecnología, existe una necesidad de nuevos métodos de
-            ensayo y una nueva clasificación para filtros absolutos.
-          </p>
-          <p>
-            En Alemania DIN lanzó un proyecto de norma DIN 24183 para el ensayo de estos tipos de
-            filtros basado en la medición de partículas.
-          </p>
-          <p>
-            CEN aceptó como principio básico de ensayo y sistema de clasificación: EN 1822. La norma europea EN 1822 
-            reemplaza varias normas nacionales como la DIN 24184, BS 3928 y AFNOR 44013
-          </p>
-          <img src="assets/tabla1.png" width='100%'>
-          <p>
-            En la primera fase de esta norma EN 1822 se evaluará el rendimiento fraccionario para
-            las medias de filtración lisas a la misma velocidad que en el filtro. El propósito es
-            determinar el tamaño de partículas a la cual la media ofrece la eficacia de retención más
-            baja que se denomina: Tamaño de Partícula de mayor Penetración (MPPS)
-            El tamaño de la partícula normalmente está entre 0,15 y 0,25μm. <br />
-            La siguiente fase consiste en determinar el rendimiento de captación del filtro para ese MPPS. 
-            Dependiendo del rendimiento, fugas, porosidad… se clasifican en dos grupos:
-          </p>
-          <p>
-            <ul>
-              <li>Filtros HEPA(High Efficiency Particulare Air): H-10, H-11, H-13 y H-14</li>
-              <li>Filtros ULPA(Ulpa Low Penetration Air): U-15, U-16 y U-17</li>
-            </ul>
-          </p>
-          <img src="assets/tabla2.png" width='100%'>
-          <h6>
-            Filtros para sistemas de ventilación junto a los de aire acondicionado o calefacción montados en techos, etc 
-            <mark>(solo comprar MERV13/ F7 o superiores)</mark>
-          </h6>
-          <img src="assets/tabla3.png" width='100%'>
-          <table class="tg">
-            <tbody>
-              <tr>
-                <td class="tg-0lax">MERV 13</td>
-                <td class="tg-0lax">Menos del 75%</td>
-                <td class="tg-0lax">90% o más</td>
-                <td class="tg-0lax">90% o más</td>
-                <td class="tg-0lax">Bacterias, partículas de humo, gotas de aceite y partículas finas de los estornudos</td>
-              </tr>
-              <tr>
-                <td class="tg-0lax">MERV 14</td>
-                <td class="tg-0lax">Del 75% al 84%</td>
-                <td class="tg-0lax">90% o más</td>
-                <td class="tg-0lax">90% o más</td>
-                <td class="tg-0lax">Bacterias, partículas de humo, gotas de aceite y partículas finas de los estornudos</td>
-              </tr>
-              <tr>
-                <td class="tg-0lax">MERV 15</td>
-                <td class="tg-0lax">Del 85% al 94%</td>
-                <td class="tg-0lax">90% o más</td>
-                <td class="tg-0lax">90% o más</td>
-                <td class="tg-0lax">Bacterias, partículas de humo, gotas de aceite y partículas finas de los estornudos</td>
-              </tr>
-              <tr>
-                <td class="tg-0lax">MERV 16</td>
-                <td class="tg-0lax">95% o más</td>
-                <td class="tg-0lax">90% o más</td>
-                <td class="tg-0lax">90% o más</td>
-                <td class="tg-0lax">Bacterias, partículas de humo, gotas de aceite y partículas finas de los estornudos</td>
-              </tr>
-              <tr>
-                <td class="tg-0lax">MERV 17</td>
-                <td class="tg-0lax">n/a</td>
-                <td class="tg-0lax">n/a</td>
-                <td class="tg-0lax">n/a</td>
-                <td class="tg-0lax">Pueden atrapar virus, polvo de carbón y las partículas de humo más pequeñas</td>
-              </tr>
-              <tr>
-                <td class="tg-0lax">MERV 18</td>
-                <td class="tg-0lax">n/a</td>
-                <td class="tg-0lax">n/a</td>
-                <td class="tg-0lax">n/a</td>
-                <td class="tg-0lax">Pueden atrapar virus, polvo de carbón y las partículas de humo más pequeñas</td>
-              </tr>
-              <tr>
-                <td class="tg-0lax">MERV 19</td>
-                <td class="tg-0lax">n/a</td>
-                <td class="tg-0lax">n/a</td>
-                <td class="tg-0lax">n/a</td>
-                <td class="tg-0lax">Pueden atrapar virus, polvo de carbón y las partículas de humo más pequeñas</td>
-              </tr>
-              <tr>
-                <td class="tg-0lax">MERV 20</td>
-                <td class="tg-0lax">n/a</td>
-                <td class="tg-0lax">n/a</td>
-                <td class="tg-0lax">n/a</td>
-                <td class="tg-0lax">Pueden atrapar virus, polvo de carbón y las partículas de humo más pequeñas</td>
-              </tr>
-            </tbody>
-            </table>
-          <h6>Webs donde poder comprar filtros:</h6>
-          <ul>
-            <li>
-              <a href="http://www.infiltro.es" target="_blanck">
-                http://www.infiltro.es
-              </a>
-            </li>
-            <li>
-              <a href="https://www.venfilter.es/" target="_blanck">
-                https://www.venfilter.es/
-              </a>
-            </li>
-          </ul>
-        </div>
+
+        </form>
+      </div>
+      <!-- Ventana información -->
+      <div class="tab-pane fade" id="informacion" role="tabpanel" aria-labelledby="informacion-tab">
+
+        <h3>Sobre la Calculadora&nbsp;</h3>
+        <p>Adaptaci&oacute;n de la calculadora original creada por:
+          <a href="https://forhealth.org/" target="_blanck">
+            Joseph Allen
+          </a>
+          ,
+          <a href="https://forhealth.org/" target="_blanck">
+            Jose Cedeno-Laurent
+          </a>
+          del Instituto de
+          Salud Publica de Harvard T.H. Chan Y
+          <a href="https://www.colorado.edu/even/people/shelly-miller" target="_blanck">
+            Shelly Miller
+          </a>
+          y la Universidad de Colorado Boulder:&nbsp;</p>
+        <a href="https://www.colorado.edu/even/people/shelly-miller" target="_blanck">
+          https://docs.google.com/spreadsheets/d/1NEhk1IEdbEi_b3wa6gI_zNs8uBJjlSS-86d4b7bW098/edit#gid=1882881703
+        </a>
+        <p></p>
+        <p>Lea todas las asunciones cient&iacute;ficas en la p&aacute;gina ReadMe de dicha calculadora.</p>
+        <p></p>
+        <h4>Antes de empezar, lee esto:</h4>
+        <p></p>
+        <p>Preguntas y respuestas Preguntas frecuentes sobre c&oacute;mo protegerse de la transmisi&oacute;n de aerosol
+          COVID-19 (ver secci&oacute;n 9 para Filtrado y Limpieza de Aire)</p>
+        <p></p>
+        <a href="https://translate.google.com/translate?hl=en&amp;sl=en&amp;tl=es&amp;u=https%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2Fe%2F2PACX-1vTgVkamic82Ux90zCWb5NFC6gYcDSWKYxKgh2y49uHQ5OJfGBAuQXs8igbmOaGqODI9wJ0UUnpo1dZu%2Fpub"
+          target="_blanck">
+          https://translate.google.com/translate?hl=en&amp;sl=en&amp;tl=es&amp;u=https%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2Fe%2F2PACX-1vTgVkamic82Ux90zCWb5NFC6gYcDSWKYxKgh2y49uHQ5OJfGBAuQXs8igbmOaGqODI9wJ0UUnpo1dZu%2Fpub
+        </a>
+        <p></p>
+        <p>Hilo sobre filtros HEPA y otros sistemas alternativos de filtrados escrito por Jos&eacute; Luis
+          Jim&eacute;nez (experto mundial en aerosoles), traducido y ampliado por Pablo Fuente:
+          <a href="https://threader.app/thread/1292140276467802117" target="_blanck">
+            https://threader.app/thread/1292140276467802117
+          </a>
+        </p>
+        <p></p>
+        <p>Hilo sobre Bulos sobre los filtros HEPA escrito por Jos&eacute; Luis Jim&eacute;nez (experto mundial en
+          aerosoles):
+          <a href="https://threader.app/thread/1313133739036217348" target="_blanck">
+            https://threader.app/thread/1313133739036217348
+          </a>
+        </p>
+        <p><br></p>
+        <h5>3 cosas que debemos tener en cuenta a la hora de comprar un filtro HEPA que sea eficaz contra el SARS-CoV-2
+        </h5>
+        <p></p>
+        <p>⦁<span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>Que cumpla la normativa EN 1822-1:2009 (ver abajo)
+        </p>
+        <p>⦁<span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>Que sean filtros H13 o superiores: eficacia de
+          retenci&oacute;n 99,95% o superior: H14, U15, U16 (siendo estrictos, el filtro HEPA solo incluye dos grados de
+          clasificaci&oacute;n: H13 99,95% MPPS y H14 99,995% MPPS)</p>
+        <p>⦁<span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>Que se adec&uacute;e al espacio donde lo vayamos a
+          utilizar (utilizar calculadora tasa CADR)</p>
+        <p></p>
+        <p><br></p>
+        <h3 style="text-align: center;">Informaci&oacute;n Adicional</h3>
+        <p></p>
+        <h4>Garantizar la calidad de los filtros HEPA y ULPA</h4>
+        <p>La normativa EN 1822-1:2009 de prueba de filtro europea es la base m&aacute;s importante para probar y
+          clasificar los filtros absolutos. La norma se basa en la vanguardista tecnolog&iacute;a de medici&oacute;n de
+          part&iacute;culas y en los procedimientos autorizados para determinar la eficiencia energ&eacute;tica. Consta
+          de cinco partes. Al filtro se le asigna la clase de filtro correspondiente empleando los resultados de las
+          secciones 4 (eficacia local) y 5 (eficacia integral).</p>
+        <p>Se generan un informe de prueba individual y un n&uacute;mero de serie para los filtros de las clases H13 y
+          superiores. Por lo tanto, se puede asignar a cada filtro a partir de H13 su prueba individual.&nbsp;</p>
+        <p></p>
+        <h4>Parte 1: Clasificaci&oacute;n, rendimiento, prueba e identificaci&oacute;n</h4>
+        <p>La EN 1822-1:2009 establece tres grupos:</p>
+        <p>⦁<span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>Grupo E: Filtro EPA &ndash; Efficient particulate
+          air</p>
+        <p>⦁<span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>Grupo H: Filtro HEPA &ndash; High
+          efficiency-particular air</p>
+        <p>⦁<span style="white-space:pre;">&nbsp; &nbsp;&nbsp;</span>Grupo U: Filtro ULPA &ndash; Ultra low penetration
+          air</p>
+        <p>Los filtros absolutos se clasifican seg&uacute;n los valores de eficacia locales e integrales que se
+          determinan durante la prueba.</p>
+        <p></p>
+        <h4>Parte 2: Producci&oacute;n de aerosol, equipo de medici&oacute;n, estad&iacute;sticas de recuento de
+          part&iacute;culas</h4>
+        <p>Esta parte describe las condiciones de prueba y los generadores de aerosol, la tecnolog&iacute;a de
+          medici&oacute;n de part&iacute;culas y los procedimientos estad&iacute;sticos para evaluar los recuentos.</p>
+        <img src="assets/tabla1.png" width='100%'>
+        <p>* La eficacia integral es el valor medio de todas las eficacias locales sobre el &aacute;rea frontal del
+          filtro.En la primera fase de esta norma EN 1822 se evaluar&aacute; el rendimiento fraccionario para las
+          medidas de filtraci&oacute;n listas a la misma velocidad que en el filtro. El prop&oacute;sito es determinar
+          el tama&ntilde;o de part&iacute;culas a la cual la media ofrece la eficacia de retenci&oacute;n m&aacute;s
+          baja que se denomina: Tama&ntilde;o de Part&iacute;cula de Mayor Penetraci&oacute;n (MPPS).</p>
+        <h4>Parte 3: Prueba del medio filtrante de l&aacute;mina plana (determina el MMPS)</h4>
+        <p>La parte 3 describe la determinaci&oacute;n de la eficiencia fraccional y la determinaci&oacute;n del
+          tama&ntilde;o de part&iacute;cula m&aacute;s penetrante (MMPS) del medio filtrante de l&aacute;mina plana.</p>
+        <p>Se aplica un aerosol de prueba al medio filtrante a la velocidad de flujo nominal especificada para el uso
+          posterior del filtro. Los flujos parciales del aerosol de prueba se dirigen hacia arriba y hacia abajo en la
+          muestra del filtro. El m&eacute;todo de recuento de part&iacute;culas determina las concentraciones de
+          part&iacute;culas y calcula la curva de eficiencia fraccional. El tama&ntilde;o de part&iacute;cula en el que
+          la curva de eficiencia fraccional alcanza su punto m&aacute;s bajo se llama el MPPS. En t&eacute;rminos
+          m&aacute;s sencillos, este es el tama&ntilde;o de part&iacute;cula con el que un medio filtrante trabaja peor
+          para una velocidad de flujo definida.</p>
+        <p></p>
+        <h4>Parte 4: Prueba de fugas de elementos del filtro (m&eacute;todo de esc&aacute;ner)</h4>
+        <p>Esta secci&oacute;n trata sobre c&oacute;mo probar que los filtros no tienen fugas. Pueden producirse fugas
+          debido a fallas en el medio filtrante, a un sellado inadecuado entre el conjunto de pliegues y el marco o a
+          irregularidades en el manejo de los componentes. Debido a la elevada eficiencia de filtraci&oacute;n estimada
+          para los filtros absolutos, incluso la m&aacute;s m&iacute;nima fuga (apenas visible para el ojo humano) puede
+          producir mayores concentraciones de part&iacute;culas locales.</p>
+        <p>Para el proceso automatizado (prueba de esc&aacute;ner), el elemento filtrante se coloca en un banco de
+          ensayos y luego se aplica un aerosol de prueba de DEHS (di-2-etilhexil sebacato). El tama&ntilde;o medio de la
+          part&iacute;cula del aerosol debe estar en el rango del MPPS. La aproximaci&oacute;n del lado del flujo del
+          filtro se realiza empleando sondas con un eje lineal controlado por ordenador. En cada punto del lado del aire
+          limpio se miden las concentraciones locales de aerosol para fijar el grado de penetraci&oacute;n local. Si la
+          concentraci&oacute;n de aerosol no supera el l&iacute;mite establecido en ning&uacute;n punto, se considera
+          que el filtro no presenta fugas.</p>
+        <p>La necesidad de determinar las eficiencias locales tambi&eacute;n implica la necesidad de realizar pruebas
+          individuales para cada elemento del filtro de las clases de filtro superiores a H13.</p>
+        <p></p>
+        <h4>Parte 5: Determinaci&oacute;n de la eficiencia de los elementos del filtro</h4>
+        <p>La parte 5 describe la determinaci&oacute;n de la eficiencia del filtro integral. Este valor suele calcularse
+          como la media de las eficiencias individuales locales que se han medido en la parte 4. De manera alternativa,
+          tambi&eacute;n se permite una medici&oacute;n individual con sondas de muestreo fijas.</p>
+        <p></p>
       </div>
     </div>
     <script>
-      function calculoCADR() {
-        const m2 = document.querySelector('#m2');
+      function calculoCADR() {        
+        const largo = document.querySelector('#largo');
+        const ancho = document.querySelector('#ancho');
+        const m2 = largo.value * ancho.value;
         const altura = document.querySelector('#altura');
         const ventilacion = document.querySelector('#ventilacion');
         const normativa = document.querySelector('#normativa');
         const cadr = document.querySelector('#cadr');
-        const cambioTotal = document.querySelector('#cambio-total');
-        const aireFresco = document.querySelector('#aire-fresco');
-        const filtroHepa = document.querySelector('#filtro-hepa');
-        let v1 = 0
-        let v2 = 0
-        let v3 = 0
-        let v4 = 0
-        if (parseInt(normativa.value) === 1) {
-          v1 = (m2.value * altura.value * (5 - ventilacion.value)).toFixed(2)
-          v2 = v1 / (m2.value * altura.value)
-          v3 = ventilacion.value
-          v4 = parseFloat(v2) + parseFloat(v3)
+        const cfm = document.querySelector('#cfm');      
+        const cambiosDesea = document.querySelector('#cambios');
+        let pie = 0.3048;
+       
+        let round = function (num) {
+          return Math.round((num + Number.EPSILON) * 100) / 100
         }
-        cadr.innerHTML = v1
-        cambioTotal.innerHTML = v4
-        aireFresco.innerHTML = v3
-        filtroHepa.innerHTML = v2
-        const aGoogle = document.querySelector('#aGoogle');
-        const aAmazon = document.querySelector('#aAmazon');
-        const dGoogle = document.querySelector('#aGoogle div');
-        const dAmazon = document.querySelector('#aAmazon div');
-        const aText = `Filtros HEPA ${v1} m3/h`
-        dGoogle.innerHTML = aText
-        dAmazon.innerHTML = aText
-        aGoogle.href = `https://www.google.com/search?tbm=shop&q=filtros+hepa+${v1}+m3/h`
-        aAmazon.href = `https://www.amazon.es/s?k=filtros+hepa+${v1}+m3/h`
+
+        let cambiosNecesitaFiltro = cambiosDesea.value - ventilacion.value;        
+        
+        let cadrValue = cambiosDesea.value * altura.value * ancho.value * largo.value
+        cadr.innerHTML = round(cadrValue)
+        let cfmValue = cadrValue/0.028316846592/60
+        cfm.innerHTML = round(cfmValue)
+
+        const estudiantes = document.querySelector('#estudiantes');
+        const profesores = document.querySelector('#profesores');
+        const calibracionCO2 = document.querySelector('#calibracionCO2');
+        const maxCO2SinFiltro = document.querySelector('#maxCO2SinFiltro');
+        const maxCO2 = document.querySelector('#maxCO2');
+        debugger
+        let totalLpm = (estudiantes.value * 0.24636) + (profesores.value * 0.36812)
+        let H14 = ((largo.value * ancho.value * altura.value)*ventilacion.value)/60 //Flujo aire exterior
+        let H15 = (largo.value * ancho.value * altura.value)*cambiosDesea.value/60 //Flujo aire interior
+        let H26 = H14 * 1000       
+        let H28 = 1
+        let H29 = 0.000001
+        let K14 = +H14+H15
+        let K15 = K14*1000
+
+        let maxCO2SinFiltroValue = (totalLpm + (K15 * calibracionCO2.value * H28 * H29)) / (K15 * H28 * H29)
+        let maxCO2Value = (totalLpm + (H26 * calibracionCO2.value * H28 * H29)) / (H26 * H28 * H29)
+        maxCO2SinFiltro.innerHTML = round(maxCO2SinFiltroValue)
+        maxCO2.innerHTML = round(maxCO2Value)
       }
-      document.addEventListener('DOMContentLoaded', calculoCADR())
+
+     
+
+      document.addEventListener('DOMContentLoaded', calculoCADR())  
     </script>
-  </body>
+</body>
+
 </html>
