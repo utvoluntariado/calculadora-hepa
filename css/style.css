@@ -256,3 +256,23 @@ select.form-control {
   margin: 30px 0 10px;
   text-align: center;
 }
+
+.background-border {
+  position : fixed;
+  z-index : -1;
+  background-color: #3282b8;
+  width: 90px;
+  height: 100vh;
+}
+
+.background-logo {
+  position: fixed;
+  z-index: 0;
+  background-image: url(../assets/UTV.png);
+  width: 300px;
+  height: 90px;
+  left: 34px;
+  bottom: 50px;
+  background-size: cover;
+  
+}
