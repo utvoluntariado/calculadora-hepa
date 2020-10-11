@@ -26,11 +26,15 @@ body {
 }
 
 h4.title {
-  background: #0f4c75;
+  background-image: url(../assets/icono.png);
+  background-color: #3282b8;
   margin: -1px -17px 0px;
+  background-size: 33px;
+  background-position: 3px 3px;
   color: white;
-  padding: 10px;
+  padding: 8px 10px 10px 40px;
   font-size: 18px;
+  background-repeat: no-repeat;
 }
 
 div#tabHEPA {
