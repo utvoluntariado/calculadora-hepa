@@ -1,5 +1,5 @@
 body {
-  background-color: #EFEFEF;
+  background-color: #eeeeee;
   margin: 0;
   font-size: 0.9rem;
 }
@@ -26,8 +26,8 @@ body {
 }
 
 h4.title {
-  background: #7471fc;
-  margin: 0 -16px 16px;
+  background: #0f4c75;
+  margin: -1px -17px 0px;
   color: white;
   padding: 10px;
   font-size: 18px;
@@ -104,13 +104,13 @@ select.form-control {
   border: 1px solid #CCC;
   font-weight: normal;
   background: blanchedalmond;
-  color: #7471FC;
+  color: #0f4c75;
 }
 
 #cadr,
 #maxCO2,
 #maxCO2SinFiltro {
-  background-color: #7471fc;
+  background-color: #0f4c75;
   color: #FFFFFF;
   font-size: 1.4rem;
 }
@@ -161,11 +161,11 @@ select.form-control {
 
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
-  background-color: #7471fc;
+  background-color: #0f4c75;
 }
 
 .nav-link {
-  color: #7471fc;
+  color: #0f4c75;
   display: table-caption;
   text-align: center;
 }
@@ -205,7 +205,7 @@ select.form-control {
 
 .nav-pills .nav-link.active {
   background-color: transparent;
-  color: #7471fc;
+  color: #0f4c75;
 }
 
 .nav-pills .nav-link {
@@ -240,12 +240,12 @@ select.form-control {
 
 .resultado {
   padding: 10px;
-  background: rgb(116 113 252 / 0.1);
+  border: 2px solid #bbe1fa;
   border-radius: 5px;
 }
 
 .subtitle {
-  background: rgb(116 113 252 / 0.75);
+  background: #3282b8;
   color: white;
   padding: 5px 0;
   font-weight: 500;
