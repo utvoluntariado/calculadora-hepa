@@ -41,7 +41,10 @@ div#tabHEPA {
   overflow-x: hidden;
   overflow-y: auto;
   height: calc(100% - 115px);
-  margin-top: 10px;
+  margin-top: 10px;  
+  padding-right: 10px;
+  padding-left: 5px;
+
 }
 
 h6 {
@@ -234,7 +237,7 @@ select.form-control {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #3282b8;
 }
 
 /* Handle on hover */
