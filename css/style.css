@@ -260,22 +260,29 @@ select.form-control {
   text-align: center;
 }
 
-.background-border {
-  position : fixed;
-  z-index : -1;
-  background-color: #3282b8;
-  width: 90px;
-  height: 100vh;
+
+
+@media (min-width: 1050px){
+  .background-logo {
+    position: fixed;
+    z-index: 0;
+    background-image: url(../assets/UTV.png);
+    width: 300px;
+    height: 90px;
+    left: 34px;
+    bottom: 50px;
+    background-size: cover;    
+  }
+  .background-border {
+    position : fixed;
+    z-index : -1;
+    background-color: #3282b8;
+    width: 90px;
+    height: 100vh;
+  }  
+  .footer{  
+    display: none;
+  }
 }
 
-.background-logo {
-  position: fixed;
-  z-index: 0;
-  background-image: url(../assets/UTV.png);
-  width: 300px;
-  height: 90px;
-  left: 34px;
-  bottom: 50px;
-  background-size: cover;
-  
-}
+
