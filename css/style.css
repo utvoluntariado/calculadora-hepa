@@ -285,4 +285,8 @@ select.form-control {
   }
 }
 
+.footer {  
+  background-color: #eee;
+  margin-top: 20px;
+}
 
