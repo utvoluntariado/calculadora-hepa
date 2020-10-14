@@ -1,5 +1,5 @@
 body {
-  background-color: #eeeeee;
+  background-color: #EFEFEF;
   margin: 0;
   font-size: 0.9rem;
 }
@@ -26,25 +26,19 @@ body {
 }
 
 h4.title {
-  background-image: url(../assets/icono.png);
-  background-color: #3282b8;
-  margin: -1px -17px 0px;
-  background-size: 33px;
-  background-position: 3px 3px;
+  background: #7471fc;
+  margin: 0 -16px 16px;
   color: white;
-  padding: 8px 10px 10px 40px;
+  padding: 10px;
   font-size: 18px;
-  background-repeat: no-repeat;
 }
 
 div#tabHEPA {
   overflow-x: hidden;
   overflow-y: auto;
   height: calc(100% - 115px);
-  margin-top: 10px;  
-  padding-right: 10px;
-  padding-left: 5px;
-
+  margin-top: 10px;
+  z-index: 1;
 }
 
 h6 {
@@ -111,13 +105,13 @@ select.form-control {
   border: 1px solid #CCC;
   font-weight: normal;
   background: blanchedalmond;
-  color: #0f4c75;
+  color: #7471FC;
 }
 
 #cadr,
 #maxCO2,
 #maxCO2SinFiltro {
-  background-color: #0f4c75;
+  background-color: #7471fc;
   color: #FFFFFF;
   font-size: 1.4rem;
 }
@@ -168,11 +162,11 @@ select.form-control {
 
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
-  background-color: #0f4c75;
+  background-color: #FFF;
 }
 
 .nav-link {
-  color: #0f4c75;
+  color: #7471fc;
   display: table-caption;
   text-align: center;
 }
@@ -185,6 +179,7 @@ select.form-control {
   width: 50%;
   text-align: center;
   display: grid;
+  background-color: #FFF;
 }
 
 .nav-item:first-child {
@@ -196,7 +191,8 @@ select.form-control {
   bottom: 4px;
   left: 0;
   width: 100%;
-  background: transparent;
+  background-color: #FFF;
+  z-index: 9;
 }
 
 .nav-container>.nav {
@@ -211,8 +207,7 @@ select.form-control {
 }
 
 .nav-pills .nav-link.active {
-  background-color: transparent;
-  color: #0f4c75;
+  color: #7471fc;
 }
 
 .nav-pills .nav-link {
@@ -237,7 +232,7 @@ select.form-control {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #3282b8;
+  background: #888;
 }
 
 /* Handle on hover */
@@ -247,46 +242,15 @@ select.form-control {
 
 .resultado {
   padding: 10px;
-  border: 2px solid #bbe1fa;
+  background: rgb(116 113 252 / 0.1);
   border-radius: 5px;
 }
 
 .subtitle {
-  background: #3282b8;
+  background: rgb(116 113 252 / 0.75);
   color: white;
   padding: 5px 0;
   font-weight: 500;
   margin: 30px 0 10px;
   text-align: center;
 }
-
-
-
-@media (min-width: 1050px){
-  .background-logo {
-    position: fixed;
-    z-index: 0;
-    background-image: url(../assets/UTV.png);
-    width: 300px;
-    height: 90px;
-    left: 34px;
-    bottom: 50px;
-    background-size: cover;    
-  }
-  .background-border {
-    position : fixed;
-    z-index : -1;
-    background-color: #3282b8;
-    width: 90px;
-    height: 100vh;
-  }  
-  .footer{  
-    display: none;
-  }
-}
-
-.footer {  
-  background-color: #eee;
-  margin-top: 20px;
-}
-
