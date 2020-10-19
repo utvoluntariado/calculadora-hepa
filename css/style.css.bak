@@ -6,6 +6,10 @@ body {
 
 #contHEPA {
   background-color: #FFF;
+  border: 1px solid #CCC;
+  border-radius: 5px;
+  box-shadow: 0px 3px 10px #CCC;
+  height: 100vh;
   margin: 0px auto;
   max-width: 425px;
   padding: 0 16px;
@@ -22,12 +26,13 @@ body {
 }
 
 h4.title {
+  background-image: url(../assets/icono.png);
   background-color: #3282b8;
   margin: -1px -17px 0px;
   background-size: 33px;
   background-position: 3px 3px;
   color: white;
-  padding: 8px 8px 8px 24px;
+  padding: 8px 10px 10px 40px;
   font-size: 18px;
   background-repeat: no-repeat;
 }
@@ -39,8 +44,7 @@ div#tabHEPA {
   margin-top: 10px;  
   padding-right: 10px;
   padding-left: 5px;
-  padding-bottom: 80px;
-  z-index: 1;
+
 }
 
 h6 {
@@ -181,7 +185,6 @@ select.form-control {
   width: 50%;
   text-align: center;
   display: grid;
-  background-color: #FFF;
 }
 
 .nav-item:first-child {
@@ -190,34 +193,29 @@ select.form-control {
 
 .nav-container {
   position: fixed;
-  bottom: -1px;
-  margin: 0 -16px;  
-  max-width: 425px;
+  bottom: 4px;
+  left: 0;
   width: 100%;
-  z-index: 9;
+  background: transparent;
 }
 
 .nav-container>.nav {
-  border-top: 1px solid #ccc;
-  margin: 8px auto 0;
+  box-shadow: inset 0px 2px 4px -2px #ccc;
+  margin: 0 auto 1px;
   max-width: 425px;
+  padding-top: 6px;
 }
 
 #informacion img {
   margin: 16px 0;
 }
 
-.nav-pills .nav-link,
 .nav-pills .nav-link.active {
-  background-color: #ffffff;
-}
-
-.nav-pills .nav-link.active {
+  background-color: transparent;
   color: #0f4c75;
 }
 
 .nav-pills .nav-link {
-  border-radius: 0;
   color: #ccc;
 }
 
@@ -262,6 +260,31 @@ select.form-control {
   text-align: center;
 }
 
+
+
+@media (min-width: 1050px){
+  .background-logo {
+    position: fixed;
+    z-index: 0;
+    background-image: url(../assets/UTV.png);
+    width: 300px;
+    height: 90px;
+    left: 34px;
+    bottom: 50px;
+    background-size: cover;    
+  }
+  .background-border {
+    position : fixed;
+    z-index : -1;
+    background-color: #3282b8;
+    width: 90px;
+    height: 100vh;
+  }  
+  .footer{  
+    display: none;
+  }
+}
+
 .footer {  
   background-color: #eee;
   margin-top: 20px;
@@ -271,3 +294,4 @@ select.form-control {
   height: 100%;
   margin: 0 !important;
 }
+
