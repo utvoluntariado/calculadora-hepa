@@ -1,4 +1,10 @@
-function calculoCADR() {        
+let _idioma = ''
+
+function calculoCADR() {
+  let lang = new URLSearchParams(window.location.search)
+  let langIsNull = lang.get('lang') !== null
+  _idioma = langIsNull ? lang.get('lang') : navigator.language.substr(0,2)
+
   const largo = document.querySelector('#largo');
   const ancho = document.querySelector('#ancho');
   const m2 = largo.value * ancho.value;
@@ -47,14 +53,52 @@ function calculoCADR() {
 
   maxCO2SinFiltro.innerHTML = round(maxCO2SinFiltroValue)
   maxCO2.innerHTML = round(maxCO2Value)
-
-  const infVentilacion = document.querySelector('#infVentilacion');
-  let v = parseFloat(ventilacion.value)
-  infVentilacion.innerHTML = (v === 4) ? 'Seleccione esta opci&oacute;n solo si su escuela ha realizado mejor&iacute;as mas all&aacute; de los requisitos m&iacute;nimos.'
-    : (v === 3) ? 'Esta es una aproximaci&oacute;n de la m&iacute;nima tasa de cambio de aire que deber&iacute;a estar en las escuelas por dise&ntilde;o, pero la mayor&iacute;a no logra alcanzar este valor.'
-    : (v === 1.5) ? 'Esta es una aproximaci&oacute;n de la tasa promedio de cambio de aire en muchas escuelas, basada en estudios de investigaci&oacute;n.'
-    : (v === 1) ? 'Seleccione esta opci&oacute;n si su escuela tiene baja ventilaci&oacute;n o si no est&aacute; seguro/a (como referencia, una casa en EEUU tiene 0.5 CAH tipicamente).'
-    : 'Selecciones esta opci&oacute;n si su escuela tiene mala ventilaci&oacute;n.'
+  
+  this.infVentilacion()
 }
 
-document.addEventListener('DOMContentLoaded', calculoCADR())  
+function infVentilacion () {
+  const infVentilacion = document.querySelector('#infVentilacion');
+  let v = parseFloat(ventilacion.value)
+  let idioma = document.getElementById("idioma").value;
+  let i18n = (idioma === 'en') ? en : es
+  infVentilacion.innerHTML = (v === 4) ? `${i18n.i18n_ventilacion__inf4}`
+    : (v === 3) ?  `${i18n.i18n_ventilacion__inf3}`
+    : (v === 1.5) ?  `${i18n.i18n_ventilacion__inf2}`
+    : (v === 1) ?  `${i18n.i18n_ventilacion__inf1}`
+    : `${i18n.i18n_ventilacion__inf0}`
+}
+
+function cambiarIdioma () {
+  let callerNull = cambiarIdioma.caller === null
+  let idioma = (callerNull) ? _idioma : document.getElementById("idioma").value
+  let i18n = (idioma === 'en') ? en : (idioma === 'pt') ? pt : es
+  document.getElementById("idioma").value = (idioma === 'en') ? 'en' : (idioma === 'pt') ? 'pt' : 'es'
+  let textos = [
+    'i18n_titulo', 'i18n_enlace__calculadora', 'i18n_enlace__informacion', 'i18n_introduccion',
+    'i18n_largo', 'i18n_ancho', 'i18n_altura', 'i18n_cambio__aire', 'i18n_cambio__aireInf',
+    'i18n_ventilacion__normativa', 'i18n_ventilacion', 'i18n_normativa', 'i18n_normativa__0',
+    'i18n_ventilacion__0', 'i18n_ventilacion__1', 'i18n_ventilacion__2', 'i18n_ventilacion__3', 'i18n_ventilacion__4',
+    'i18n_CADR__m3h', 'i18n_CADR__m3hInf_0', 'i18n_CADR__m3hInf_1',
+    'i18n_CADR__cfm', 'i18n_CADR__cfmInf_0', 'i18n_CADR__cfmInf_1',
+    'i18n_subtitulo', 'i18n_subtituloInf', 'i18n_numero__estudiantes', 'i18n_numero__profesores', 'i18n_calibracion__co2',
+    'i18n_limite__co2_sin__HEPA', 'i18n_limite__co2_con__HEPA', 'i18n_limite__c02Inf_0', 'i18n_limite__c02Inf_1',
+    'i18n_sobre__calculadora', 'i18n_sobre__calculadora_parrafo_1', 'i18n_sobre__calculadora_parrafo_2', 'i18n_sobre__calculadora_parrafo_3', 'i18n_sobre__calculadora_parrafo_4',
+    'i18n_antes__empezar', 'i18n_antes__empezar_parrafo_1', 'i18n_antes__empezar_parrafo_2', 'i18n_antes__empezar_parrafo_3',
+    'i18n_tres__cosas', 'i18n_tres__cosas_parrafo_1', 'i18n_tres__cosas_parrafo_2', 'i18n_tres__cosas_parrafo_3',
+    'i18n_informacion__adicional', 'i18n_garantia__filtros_parrafo_1', 'i18n_garantia__filtros_parrafo_2',
+    'i18n_garantia__filtros',
+    'i18n_parte__1', 'i18n_parte__1_parrafo_1', 'i18n_parte__1_parrafo_2', 'i18n_parte__1_parrafo_3', 'i18n_parte__1_parrafo_4', 'i18n_parte__1_parrafo_5',
+    'i18n_parte__2', 'i18n_parte__2_parrafo_1', 'i18n_parte__2_parrafo_2',
+    'i18n_parte__3', 'i18n_parte__3_parrafo_1', 'i18n_parte__3_parrafo_2',
+    'i18n_parte__4', 'i18n_parte__4_parrafo_1', 'i18n_parte__4_parrafo_2', 'i18n_parte__4_parrafo_3',
+    'i18n_parte__5', 'i18n_parte__5_parrafo_1'
+  ]
+  textos.forEach( (e, i) => {
+    let texto = textos[i]
+    document.getElementById(e).innerHTML = `${i18n[texto]}`;
+  })
+  this.infVentilacion()
+}
+
+document.addEventListener('DOMContentLoaded', calculoCADR(), cambiarIdioma())  
